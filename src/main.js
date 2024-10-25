@@ -18,6 +18,7 @@ import InputText from "primevue/inputtext";
 import {DefaultApolloClient} from "@vue/apollo-composable";
 import apolloClient from "./shared/services/apollo-client.js";
 import SplitterPanel from "primevue/splitterpanel";
+import Button from "primevue/button";
 
 const app = createApp(App);
 
@@ -36,4 +37,5 @@ app.component('pv-card', Card)
     .component('pv-icon-field', IconField)
     .component('pv-input-icon', InputIcon)
     .component('pv-input-text', InputText)
+    .component('pv-button', Button)
 app.mount('#app')
