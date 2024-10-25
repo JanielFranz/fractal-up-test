@@ -75,14 +75,12 @@ export default {
 
     onWordAdded(word) {
       this.searchWord = word;
-      if(word === ""){
-        this.filteredCountries = this.countries;
-      } else {
+
         this.filteredCountries = this.countries.filter((country) =>
             country.name.toLowerCase().includes(word.toLowerCase())
         );
-      }
-      console.log("Word added", word);
+
+      console.log("Word added", this.searchWord);
       console.log("Filtered countries", this.filteredCountries);
     }
 
