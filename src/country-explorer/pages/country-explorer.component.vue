@@ -56,6 +56,7 @@ export default {
     async getCountries() {
       try{
         let countriesResponse = await this.countryService.getAllCountries();
+        console.log(countriesResponse);
         countriesResponse = countriesResponse.map(country => ({
           ...country,
           continent: country.continent.name
