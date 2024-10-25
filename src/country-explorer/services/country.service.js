@@ -1,5 +1,5 @@
 // country.service.js
-import { gql } from '@apollo/client/core';
+import {gql} from '@apollo/client/core';
 import apolloClient from '../../shared/services/apollo-client.js';
 
 export class CountryService {
@@ -34,7 +34,7 @@ export class CountryService {
             const { data } = await apolloClient.query({
                 query: this.GET_COUNTRIES,
             });
-            return data.countries;
+            return data.countries.slice(0, 40);
         } catch (error) {
             console.error('Error fetching countries', error);
             throw error;
