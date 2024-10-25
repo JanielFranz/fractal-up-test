@@ -11,11 +11,15 @@ export default {
   data() {
     return {
       countries: [],
+      filteredCountries: [],
       countryService: null,
-      imageService: null
+      imageService: null,
+      searchWord: ""
     }
   },
   methods : {
+    //#region Utility Methods
+
     async getCountryImageUrlByName(name) {
       try{
         let imagesResponse = await this.imageService.getImageByName(name);
@@ -44,6 +48,9 @@ export default {
       }
     },
 
+    //#endregion
+
+    //#region Service Methods
     async getCountries() {
       try{
         let countriesResponse = await this.countryService.getAllCountries();
@@ -55,12 +62,31 @@ export default {
         const countriesResponseWithImages = await this.buildCountriesWithImage(countriesResponse);
 
         this.countries = countriesResponseWithImages.map(country => new Country(country));
-
+        this.filteredCountries = this.countries;
         console.log("Countries final values", this.countries);
       } catch (error) {
         console.error(error);
       }
+    },
+
+    //#endregion
+
+    //#region Event Handlers
+
+    onWordAdded(word) {
+      this.searchWord = word;
+      if(word === ""){
+        this.filteredCountries = this.countries;
+      } else {
+        this.filteredCountries = this.countries.filter((country) =>
+            country.name.toLowerCase().includes(word.toLowerCase())
+        );
+      }
+      console.log("Word added", word);
+      console.log("Filtered countries", this.filteredCountries);
     }
+
+    //#endregion
   },
   created(){
     this.countryService = new CountryService();
@@ -72,8 +98,10 @@ export default {
 </script>
 
 <template>
-  <search-bar/>
-  <country-card-list :countries="countries"></country-card-list>
+  <search-bar
+      v-on:word-added="onWordAdded($event)"
+  />
+  <country-card-list :countries="searchWord === '' ? countries : filteredCountries"></country-card-list>
 </template>
 
 <style scoped>
