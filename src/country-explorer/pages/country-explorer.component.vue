@@ -37,9 +37,11 @@ export default {
             countries.map(async (country) => {
 
               const countryImageUrl = await this.getCountryImageUrlByName(country.name);
+              const countryFlagImageUrl = await this.getCountryImageUrlByName(`${country.name} flag`);
               return {
                 ...country,
                 countryImgUrl: countryImageUrl,
+                countryFlagImgUrl: countryFlagImageUrl
               };
             })
         );
