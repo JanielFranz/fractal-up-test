@@ -39,7 +39,7 @@ export default {
     </pv-card>
   </div>
 
-  <country-item-dialog :country="country" v-bind:visible="dialogVisible"/>
+  <country-item-dialog :country="country" :visible="dialogVisible" @update:visible="dialogVisible = $event"/>
 
 </template>
 

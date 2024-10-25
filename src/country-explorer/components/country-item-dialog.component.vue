@@ -15,16 +15,12 @@ export default {
       required: true
     }
   },
-  methods: {
-    onCloseSelected() {
-      this.$emit('close-selected', false);
-    }
-  }
+  emits:["update:visible"]
 }
 </script>
 
 <template>
-  <pv-dialog :visible="visible" @hide="onCloseSelected">
+  <pv-dialog :visible="visible" @update:visible="$emit('update:visible', $event)">
     <div class="flex items-center gap-4 mb-4">
       <img :src="country.countryImgUrl" :alt="country.name"/>
     </div>
@@ -44,7 +40,7 @@ export default {
           {{ language }} <span v-if="index < country.languages.length -1">, </span>
         </span>
       </p>
-      <p>Currency: {{country.currency}}</p>
+      <p>Currency: {{ country.currency }}</p>
     </div>
   </pv-dialog>
 </template>
