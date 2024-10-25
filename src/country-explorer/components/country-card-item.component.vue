@@ -30,9 +30,9 @@ export default {
 
 <template>
   <div class="card" @click="openDialog">
-    <pv-card style="width: 22rem; height:22rem; overflow: hidden" class="mb-4">
+    <pv-card style="width: 18rem; height:18rem; overflow: hidden" class=" ml-4 mb-4">
       <template #header>
-        <img :src="country.countryImgUrl" alt="country image" style="width:22rem; height: 16rem;">
+        <img :src="country.countryImgUrl" alt="country image" style="width:18rem; height: 12rem;">
       </template>
       <template #title>
         <div class="grid align-items-center">
@@ -61,11 +61,14 @@ export default {
     text-align: center;
     margin-top: 0.1rem;
     font-size: 1rem;
+    font-weight: bold;
+    color: deepskyblue;
   }
   .subtitle-center {
     text-align: center;
     margin-top: 0.1rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    color: #808080;
   }
   .country-flag {
     width:5rem;

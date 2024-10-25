@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <div class="grid">
+  <div class="grid mt-4">
     <div v-for="country in countries"
          :key="country.name"
          class="col-12 sm:col-6 lg:col-4"
