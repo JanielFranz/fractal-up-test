@@ -35,11 +35,20 @@ export default {
         <img :src="country.countryImgUrl" alt="country image" style="width:22rem; height: 16rem;">
       </template>
       <template #title>
-        <h3 class="title-center">{{ country.name }} </h3>
+        <div class="grid align-items-center">
+          <div class="col-12 md:col-3 mb-4">
+            <img :src="country.countryFlagImgUrl"
+                 :alt="country.countryFlagImgUrl"
+                 class="country-flag"
+            />
+          </div>
+          <div class="col-12 md:col-8">
+            <h3 class="title-center">{{ country.name }} </h3>
+            <h4 class="subtitle-center">{{ country.continent }}</h4>
+          </div>
+        </div>
       </template>
-      <template #subtitle>
-        <h4 class="subtitle-center">{{ country.continent }}</h4>
-      </template>
+
     </pv-card>
   </div>
 
@@ -57,5 +66,9 @@ export default {
     text-align: center;
     margin-top: 0.1rem;
     font-size: 1rem;
+  }
+  .country-flag {
+    width:5rem;
+    height: 3rem;
   }
 </style>
