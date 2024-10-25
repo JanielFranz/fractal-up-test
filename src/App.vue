@@ -11,7 +11,12 @@ export default {
 </script>
 
 <template>
-  <country-explorer/>
+  <pv-splitter style="height: auto">
+    <pv-splitter-panel class="flex items-center justify-content-center" :size="15" :minSize="5"> Panel 1 </pv-splitter-panel>
+    <pv-splitter-panel  :size="85">
+      <country-explorer/>
+    </pv-splitter-panel>
+  </pv-splitter>
 </template>
 
 <style scoped>

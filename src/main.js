@@ -17,6 +17,7 @@ import InputText from "primevue/inputtext";
 
 import {DefaultApolloClient} from "@vue/apollo-composable";
 import apolloClient from "./shared/services/apollo-client.js";
+import SplitterPanel from "primevue/splitterpanel";
 
 const app = createApp(App);
 
@@ -30,6 +31,7 @@ app.use(PrimeVue, { theme: { preset:Aura }, ripple: true})
 app.component('pv-card', Card)
     .component('pv-toolbar', Toolbar)
     .component('pv-splitter', Splitter)
+    .component('pv-splitter-panel', SplitterPanel)
     .component('pv-dialog', Dialog)
     .component('pv-icon-field', IconField)
     .component('pv-input-icon', InputIcon)

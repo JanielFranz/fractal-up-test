@@ -23,6 +23,7 @@ export default {
     async getCountryImageUrlByName(name) {
       try{
         let imagesResponse = await this.imageService.getImageByName(name);
+        console.log('Images response', imagesResponse);
         imagesResponse  = imagesResponse.data;
         return imagesResponse.hits[0].webformatURL;
       }catch(error){
@@ -31,13 +32,15 @@ export default {
       }
     },
 
+
+
     async buildCountriesWithImage(countries) {
       try{
         return await Promise.all(
             countries.map(async (country) => {
 
               const countryImageUrl = await this.getCountryImageUrlByName(country.name);
-              const countryFlagImageUrl = await this.getCountryImageUrlByName(`${country.name} flag`);
+              const countryFlagImageUrl = await this.getCountryImageUrlByName(`flag of ${country.name}`);
               return {
                 ...country,
                 countryImgUrl: countryImageUrl,
