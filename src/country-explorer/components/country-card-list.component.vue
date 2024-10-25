@@ -14,9 +14,15 @@ export default {
 </script>
 
 <template>
-  <div v-for="country in countries" :key="country.name">
-    <country-card-item :country="country"/>
+  <div class="grid">
+    <div v-for="country in countries"
+         :key="country.name"
+         class="col-12 sm:col-6 lg:col-4"
+    >
+      <country-card-item :country="country"/>
+    </div>
   </div>
+
 </template>
 
 <style scoped>
