@@ -29,7 +29,7 @@ export default {
                      :to="item.to" custom
                      class="flex flex-column"
         >
-          <pv-button :href="href" class="" @click="navigate">{{ item.label }}</pv-button>
+          <pv-button severity="info" :href="href" style="width:10rem;" @click="navigate">{{ item.label }}</pv-button>
         </router-link>
       </div>
     </pv-splitter-panel>
@@ -44,9 +44,11 @@ export default {
     overflow: hidden;
     position: relative;
     height: 100%;
+    background-color: lightgrey;
   }
   .panel-2 {
     height: 100%;
     overflow-y:auto;
+    background-color: lightskyblue;
   }
 </style>

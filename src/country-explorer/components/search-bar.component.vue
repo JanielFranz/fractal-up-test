@@ -1,6 +1,7 @@
 <script>
 
 
+
 export default {
   name: "search-bar",
   props: {
@@ -11,7 +12,6 @@ export default {
   },
   data() {
     return {
-      selectedContinent: null,
       countrySearched: "",
       dialogVisible: false,
       popOverVisible: false
@@ -43,8 +43,9 @@ export default {
     toggle(event) {
       this.$refs.op.toggle(event);
     },
-    selectContinent(continent) {
-      this.selectedContinent = continent;
+    onSelectedContinent(continent) {
+      console.log('first-co',continent);
+      this.$emit('continent-selected', continent);
       this.$refs.op.hide();
     }
   }
@@ -52,14 +53,15 @@ export default {
 </script>
 
 <template>
-  <pv-toolbar>
+  <pv-toolbar class="toolbar">
     <template #center>
       <pv-icon-field>
         <pv-input-text
             @click="toggle"
-            placeholder="Pais Escribe el pais que deseas ver"
+            placeholder="Escribe el pais que deseas ver"
             v-model="countrySearched"
             @input="onWordAdded"
+            style="width: 40rem;"
         />
         <pv-input-icon>
           <i class="pi pi-search"/>
@@ -68,15 +70,20 @@ export default {
     </template>
   </pv-toolbar>
   <pv-popover ref="op">
-    <h2>Filtrar por continentes</h2>
-    <div class="grid mt-4">
+    <div class="flex justify-content-evenly">
+      <h2 class>Filtrar por continentes</h2>
+      <pv-button severity="info" @click="onSelectedContinent('')" style="height: 2rem;" class="mt-3">Limpiar</pv-button>
+    </div>
+    <div class="grid-container">
       <div
           v-for="continent in continents"
           :key="continent.name"
-          class="col-10 sm:col-6 lg:col-4"
+          class="grid-item"
       >
-        <img :src="continent.continentImgUrl" alt="continent.name" style="height: 5rem; width: 6rem;"/>
-        <p>{{ continent.name }}</p>
+        <div class="continent-item" @click="onSelectedContinent(continent.name)">
+          <img :src="continent.continentImgUrl" alt="continent.name" style="height: 5rem; width: 6rem;"/>
+          <p>{{ continent.name }}</p>
+        </div>
       </div>
     </div>
 
@@ -84,5 +91,18 @@ export default {
 </template>
 
 <style scoped>
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:1rem;
+  }
 
+  .grid-item {
+    text-align: center;
+    padding:1rem;
+  }
+
+  .toolbar {
+    background-color: lightskyblue;
+  }
 </style>
