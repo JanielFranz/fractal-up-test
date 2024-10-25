@@ -8,8 +8,8 @@ export default {
     }
   },
   methods: {
-    onWordSearched() {
-
+    onWordAdded() {
+      this.$emit("word-added", this.countrySearched);
     }
   }
 }
@@ -19,7 +19,11 @@ export default {
   <pv-toolbar>
     <template #center>
       <pv-icon-field>
-        <pv-input-text placeholder="Pais Escribe el pais que deseas ver"/>
+        <pv-input-text
+            placeholder="Pais Escribe el pais que deseas ver"
+            v-model="countrySearched"
+            @input="onWordAdded"
+        />
         <pv-input-icon>
           <i class="pi pi-search"/>
         </pv-input-icon>
