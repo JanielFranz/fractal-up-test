@@ -4,6 +4,7 @@ import {ImageService} from "../services/image.service.js";
 import {Country} from "../model/country.entity.js";
 import CountryCardList from "../components/country-card-list.component.vue";
 import SearchBar from "../components/search-bar.component.vue";
+import {Continent} from "../model/continent.entity.js";
 
 export default {
   name: "country-explorer",
@@ -11,7 +12,9 @@ export default {
   data() {
     return {
       countries: [],
-      filteredCountries: [],
+      flexibleCountries: [],
+      continents: [],
+      filteredByWordsCountries: [],
       countryService: null,
       imageService: null,
       searchWord: ""
@@ -20,7 +23,7 @@ export default {
   methods : {
     //#region Utility Methods
 
-    async getCountryImageUrlByName(name) {
+    async getImageUrlByName(name) {
       try{
         let imagesResponse = await this.imageService.getImageByName(name);
         console.log('Images response', imagesResponse);
@@ -39,8 +42,8 @@ export default {
         return await Promise.all(
             countries.map(async (country) => {
 
-              const countryImageUrl = await this.getCountryImageUrlByName(country.name);
-              const countryFlagImageUrl = await this.getCountryImageUrlByName(`flag of ${country.name}`);
+              const countryImageUrl = await this.getImageUrlByName(country.name);
+              const countryFlagImageUrl = await this.getImageUrlByName(`flag of ${country.name}`);
               return {
                 ...country,
                 countryImgUrl: countryImageUrl,
@@ -49,6 +52,24 @@ export default {
             })
         );
       }catch (error) {
+        console.error(error);
+      }
+    },
+
+    async buildContinentEntities(countries) {
+      try{
+        const uniqueContinentsName = [...new Set(countries.map(country => country.continent))];
+        const uniqueContinentsWithImage = await Promise.all(
+            uniqueContinentsName.map(async (continentName) => {
+              const continentImageUrl = await this.getImageUrlByName(`${continentName} map`);
+              return {
+                name: continentName,
+                continentImgUrl: continentImageUrl
+              };
+            })
+        );
+        return this.continents = uniqueContinentsWithImage.map(continent => new Continent(continent));
+      }catch(error){
         console.error(error);
       }
     },
@@ -68,7 +89,13 @@ export default {
         const countriesResponseWithImages = await this.buildCountriesWithImage(countriesResponse);
 
         this.countries = countriesResponseWithImages.map(country => new Country(country));
-        this.filteredCountries = this.countries;
+        this.flexibleCountries = this.countries;
+
+        this.filteredByWordsCountries = this.flexibleCountries;
+
+        this.continents = await this.buildContinentEntities(this.countries);
+
+        console.log('continents', this.continents)
         console.log("Countries final values", this.countries);
       } catch (error) {
         console.error(error);
@@ -82,12 +109,20 @@ export default {
     onWordAdded(word) {
       this.searchWord = word;
 
-        this.filteredCountries = this.countries.filter((country) =>
+        this.filteredByWordsCountries = this.flexibleCountries.filter((country) =>
             country.name.toLowerCase().includes(word.toLowerCase())
         );
 
       console.log("Word added", this.searchWord);
-      console.log("Filtered countries", this.filteredCountries);
+      console.log("Filtered countries", this.filteredByWordsCountries);
+    },
+
+    onContinentSelected(continent) {
+      this.flexibleCountries = this.countries;
+      console.log('continent arrived', continent);
+      this.flexibleCountries = this.countries.filter((country) =>
+          country.continent.toLowerCase().includes(continent.toLowerCase())
+      );
     }
 
     //#endregion
@@ -104,8 +139,10 @@ export default {
 <template>
   <search-bar
       v-on:word-added="onWordAdded($event)"
+      v-on:continent-selected="onContinentSelected($event)"
+      :continents="continents"
   />
-  <country-card-list :countries="searchWord === '' ? countries : filteredCountries"></country-card-list>
+  <country-card-list :countries="searchWord === '' ? flexibleCountries : filteredByWordsCountries"></country-card-list>
 </template>
 
 <style scoped>
