@@ -15,12 +15,22 @@ export default {
       required: true
     }
   },
-  emits:["update:visible"]
+  data() {
+    return {
+      dialogVisible: false
+    }
+  },
+  methods: {
+    onCloseSelected() {
+      this.$emit('close-selected', false);
+    }
+
+  }
 }
 </script>
 
 <template>
-  <pv-dialog :visible="visible" @update:visible="$emit('update:visible', $event)">
+  <pv-dialog :visible="visible" @update:visible="onCloseSelected">
     <div class="flex items-center gap-4 mb-4">
       <img :src="country.countryImgUrl" :alt="country.name"/>
     </div>

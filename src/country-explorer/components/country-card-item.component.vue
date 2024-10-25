@@ -19,6 +19,10 @@ export default {
   methods: {
     openDialog() {
       this.dialogVisible = true;
+    },
+    closeDialog() {
+      console.log('close dialog');
+      this.dialogVisible = false;
     }
   }
 }
@@ -39,7 +43,7 @@ export default {
     </pv-card>
   </div>
 
-  <country-item-dialog :country="country" :visible="dialogVisible" @update:visible="dialogVisible = $event"/>
+  <country-item-dialog :country="country" :visible="dialogVisible" v-on:close-selected="closeDialog"/>
 
 </template>
 
