@@ -11,8 +11,8 @@ export default {
     return {
       items: [
         { label: 'Home', to: '/country-explorer' },
-        { label: 'View 1', to: '/view-1' },
-        { label: 'View 2', to: '/view-2' },
+        { label: 'Vista 1', to: '/view-1' },
+        { label: 'Vista 2', to: '/view-2' },
       ]
     }
   }

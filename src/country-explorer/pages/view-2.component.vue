@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-<h1>View 2</h1>
+<h1>Hola! Esta es la vista 2</h1>
 </template>
 
 <style scoped>
