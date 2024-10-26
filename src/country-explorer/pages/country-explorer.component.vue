@@ -33,7 +33,7 @@ export default {
         return await Promise.all(
             countries.map(async (country) => {
 
-              const countryImageUrl = await this.getImageUrlByName(country.name);
+              const countryImageUrl = await this.getImageUrlByName(`country ${country.name}`);
               const countryFlagImageUrl = await this.getFlagImageUrlByName(`flag of ${country.name}`);
               return {
                 ...country,
@@ -80,16 +80,22 @@ export default {
      * @returns {Promise<*|null>} - image url
      */
     async getImageUrlByName(name) {
-      try{
-        let imagesResponse = await this.imageService.getImageByName(name);
-        console.log('Images response', imagesResponse);
-        imagesResponse  = imagesResponse.data;
-        return imagesResponse.hits[0].webformatURL;
-      }catch(error){
+      try {
+        const { data } = await this.imageService.getImageByName(name);
+        console.log('Images response', data);
+
+        const { hits } = data;
+        if (hits.length > 0) {
+          return hits[0].webformatURL;
+        }
+
+        return null;
+      } catch (error) {
         console.error(error);
         return null;
       }
     },
+
 
     /**
      * Get flag image url by country name

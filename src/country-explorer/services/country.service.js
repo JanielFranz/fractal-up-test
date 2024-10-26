@@ -34,7 +34,7 @@ export class CountryService {
             const { data } = await apolloClient.query({
                 query: this.GET_COUNTRIES,
             });
-            return data.countries.slice(66, 87);
+            return data.countries.slice(98,117);
         } catch (error) {
             console.error('Error fetching countries', error);
             throw error;
