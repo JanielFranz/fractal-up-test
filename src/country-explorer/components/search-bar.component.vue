@@ -61,7 +61,7 @@ export default {
             placeholder="Escribe el pais que deseas ver"
             v-model="countrySearched"
             @input="onWordAdded"
-            style="width: 40rem;"
+            class="input-search"
         />
         <pv-input-icon>
           <i class="pi pi-search"/>
@@ -70,11 +70,11 @@ export default {
     </template>
   </pv-toolbar>
   <pv-popover ref="op">
-    <div class="flex justify-content-evenly">
-      <h2 class>Filtrar por continentes</h2>
-      <pv-button severity="info" @click="onSelectedContinent('')" style="height: 2rem;" class="mt-3">Limpiar</pv-button>
+    <div class="flex justify-content-evenly w-[25rem]">
+      <h2 class="pop-text">Filtrar por continentes</h2>
+      <pv-button severity="info" @click="onSelectedContinent('')" style="height: 2rem;" class="mt-2">Limpiar</pv-button>
     </div>
-    <div class="grid-container">
+    <div class="grid-container ">
       <div
           v-for="continent in continents"
           :key="continent.name"
@@ -91,10 +91,19 @@ export default {
 </template>
 
 <style scoped>
+  .input-search {
+    width: 40rem;
+  }
+
+  @media (max-width: 640px) {
+    .input-search {
+      width: auto;
+    }
+  }
   .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:1rem;
+
   }
 
   .grid-item {
@@ -104,5 +113,11 @@ export default {
 
   .toolbar {
     background-color: lightskyblue;
+  }
+
+  .pop-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: grey;
   }
 </style>

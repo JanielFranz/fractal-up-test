@@ -64,8 +64,8 @@ export default {
 
 <style scoped>
   .country-img {
-    width: 100%;
-    max-width: 300px;
+    height: 20rem;
+    width: 20rem;
     border-radius: 8px;
   }
 
@@ -81,19 +81,19 @@ export default {
   }
 
   .country-capital {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: deepskyblue;
   }
 
   .country-language {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: deepskyblue;
   }
 
   .country-currency {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: deepskyblue;
   }
