@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-  <div class="card" @click="openDialog">
+  <div class="card-container" @click="openDialog">
     <pv-card style="overflow:hidden" class="card ml-3 mb-4">
       <template #header>
         <img :src="country.countryImgUrl" alt="country image" class="country-img">
@@ -85,6 +85,16 @@ export default {
   cursor: pointer;
   width: 19rem;
   height:14rem;
+  background-color: white;
+}
+
+.card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  background-color: deepskyblue ;
+  h3 {
+    color: white;
+  }
 }
 
 /* Responsiveness for small screens */
@@ -126,6 +136,10 @@ export default {
     height: 23rem;
     margin-left: 0;
     margin-right: 0;
+  }
+  .card-container{
+    width: 90%;
+    height: 23rem;
   }
   .country-img {
     width: 100%;

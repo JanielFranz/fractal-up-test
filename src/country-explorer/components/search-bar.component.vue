@@ -40,7 +40,7 @@ export default {
             placeholder="Escribe el pais que deseas ver"
             v-model="countrySearched"
             @input="onWordAdded"
-            class="input-search"
+            class="input-search bg-white"
         />
         <pv-input-icon>
           <i class="pi pi-search"/>

@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <pv-dialog :visible="visible" @update:visible="onCloseSelected">
+  <pv-dialog :visible="visible" @update:visible="onCloseSelected" class="bg-white">
     <div class="flex justify-content-center mb-4">
       <img :src="country.countryImgUrl" :alt="country.name" class="country-img"/>
     </div>

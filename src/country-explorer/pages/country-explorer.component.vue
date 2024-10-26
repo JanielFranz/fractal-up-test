@@ -69,7 +69,6 @@ export default {
         console.error(error);
       }
     },
-
     //#endregion
 
     //#region Service Methods
@@ -96,7 +95,6 @@ export default {
       }
     },
 
-
     /**
      * Get flag image url by country name
      * @param name - country name
@@ -121,7 +119,7 @@ export default {
     async getCountries() {
       try{
         let countriesResponse = await this.countryService.getAllCountries();
-        console.log(countriesResponse);
+
         countriesResponse = countriesResponse.map(country => ({
           ...country,
           continent: country.continent.name
@@ -163,7 +161,6 @@ export default {
      */
     onContinentSelected(continent) {
       this.flexibleCountries = this.countries;
-      console.log('continent arrived', continent);
       this.flexibleCountries = this.countries.filter((country) =>
           country.continent.toLowerCase().includes(continent.toLowerCase())
       );
