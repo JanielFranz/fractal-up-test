@@ -51,13 +51,13 @@ export default {
     </div>
 <!--country details-->
     <div class="flex flex-column items-center ml-5">
-      <p> <span class="country-capital">Capital: </span> {{country.capital}}</p>
+      <p> <span class="country-capital">Capital: </span> <span class="text-black-alpha-40">{{country.capital}}</span></p>
       <p> <span class="country-language">Language: </span>
-        <span v-for="(language, index) in country.languages" :key="index">
+        <span class="text-black-alpha-40" v-for="(language, index) in country.languages" :key="index">
           {{ language.name }} <span v-if="index < country.languages.length -1">, </span>
         </span>
       </p>
-      <p><span class="country-currency">Currency: </span>{{ country.currency }}</p>
+      <p><span class="country-currency">Currency: </span> <span class="text-black-alpha-40">{{ country.currency }}</span></p>
     </div>
   </pv-dialog>
 </template>

@@ -49,7 +49,7 @@ export default {
     </template>
   </pv-toolbar>
 <!--  Filter by continents -->
-  <pv-popover ref="op">
+  <pv-popover ref="op" class="bg-white">
     <div class="flex justify-content-evenly w-[25rem]">
       <h2 class="pop-text">Filtrar por continentes</h2>
       <pv-button severity="info" @click="onSelectedContinent('')" style="height: 2rem;" class="mt-2">Limpiar</pv-button>
@@ -62,7 +62,7 @@ export default {
       >
         <div class="continent-item" @click="onSelectedContinent(continent.name)">
           <img :src="continent.continentImgUrl" alt="continent.name" style="height: 5rem; width: 6rem;"/>
-          <p>{{ continent.name }}</p>
+          <p class="text-black-alpha-40">{{ continent.name }}</p>
         </div>
       </div>
     </div>

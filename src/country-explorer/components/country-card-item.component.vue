@@ -35,7 +35,7 @@ export default {
         <img :src="country.countryImgUrl" alt="country image" class="country-img">
       </template>
       <template #title>
-        <div class="country-info-container flex align-items-center justify-content-between flex-wrap">
+        <div class="country-info-container flex align-items-center flex-wrap">
           <img :src="country.countryFlagImgUrl"
                :alt="country.countryFlagImgUrl"
                class="country-flag" />
@@ -71,8 +71,10 @@ export default {
 }
 
 .country-flag {
-  width: 5rem;
-  height: 3rem;
+  width: 4rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .country-img {
@@ -99,7 +101,7 @@ export default {
 
 /* Responsiveness for small screens */
 @media (max-width: 768px) {
-  .card .pv-card {
+  .card {
     width: 100%;
     height: auto;
     margin-left: 0;
