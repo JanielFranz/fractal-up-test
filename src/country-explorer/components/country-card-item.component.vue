@@ -35,7 +35,6 @@ export default {
         <img :src="country.countryImgUrl" alt="country image" class="country-img">
       </template>
       <template #title>
-
         <div class="country-info-container flex align-items-center justify-content-between flex-wrap">
           <img :src="country.countryFlagImgUrl"
                :alt="country.countryFlagImgUrl"

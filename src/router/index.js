@@ -3,6 +3,11 @@ import CountryExplorerComponent from "../country-explorer/pages/country-explorer
 import View1Component from "../country-explorer/pages/view-1.component.vue";
 import View2Component from "../country-explorer/pages/view-2.component.vue";
 
+/**
+ * Router instance for the application
+ * @name router
+ *
+ */
 const router = createRouter({
     history: createWebHistory(),
     routes: [

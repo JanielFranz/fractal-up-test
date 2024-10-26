@@ -20,6 +20,7 @@ export default {
 </script>
 
 <template>
+<!--  Left side -->
   <pv-splitter style="height: 100vh">
     <pv-splitter-panel class=" panel-1" :size="15" :minSize="5">
       <div class="flex flex-column align-items-center gap-3 mt-5">
@@ -33,6 +34,7 @@ export default {
         </router-link>
       </div>
     </pv-splitter-panel>
+<!--    Right side -->
     <pv-splitter-panel class="panel-2" :size="85">
       <router-view/>
     </pv-splitter-panel>

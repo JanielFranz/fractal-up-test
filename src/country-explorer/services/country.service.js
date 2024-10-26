@@ -2,6 +2,11 @@
 import {gql} from '@apollo/client/core';
 import apolloClient from '../../shared/services/apollo-client.js';
 
+/**
+ * Country Service
+ * @class CountryService
+ * @description Service to fetch country data
+ */
 export class CountryService {
     GET_COUNTRIES = gql`
     query {
@@ -19,37 +24,19 @@ export class CountryService {
     }
   `;
 
-    GET_COUNTRIES_BY_CONTINENT = gql`
-    query getCountryByContinent($continent: String!) {
-      countries(filter: { continent: { eq: $continent } }) {
-        code
-        name
-        capital
-      }
-    }
-  `;
 
+    /**
+     * Gets all countries
+     * @returns {Promise<[]>} - Array of countries
+     */
     async getAllCountries() {
         try {
             const { data } = await apolloClient.query({
                 query: this.GET_COUNTRIES,
             });
-            return data.countries.slice(61, 85);
+            return data.countries.slice(66, 87);
         } catch (error) {
             console.error('Error fetching countries', error);
-            throw error;
-        }
-    }
-
-    async getCountriesByContinent(continent) {
-        try {
-            const { data } = await apolloClient.query({
-                query: this.GET_COUNTRIES_BY_CONTINENT,
-                variables: { continent },
-            });
-            return data.countries;
-        } catch (error) {
-            console.error('Error fetching countries by continent:', error);
             throw error;
         }
     }

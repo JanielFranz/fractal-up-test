@@ -1,7 +1,4 @@
 <script>
-
-
-
 export default {
   name: "search-bar",
   props: {
@@ -22,24 +19,6 @@ export default {
     onWordAdded() {
       this.$emit("word-added", this.countrySearched);
     },
-    onSearchBarClicked() {
-      console.log("search bar clicked");
-      this.dialogVisible=true;
-    },
-    //#endregion
-
-    openDialog() {
-      this.dialogVisible = true;
-    },
-
-    closeDialog() {
-      this.dialogVisible = false;
-    },
-
-    togglePopOver() {
-      this.popOverVisible = !this.popOverVisible;
-    },
-
     toggle(event) {
       this.$refs.op.toggle(event);
     },
@@ -69,6 +48,7 @@ export default {
       </pv-icon-field>
     </template>
   </pv-toolbar>
+<!--  Filter by continents -->
   <pv-popover ref="op">
     <div class="flex justify-content-evenly w-[25rem]">
       <h2 class="pop-text">Filtrar por continentes</h2>

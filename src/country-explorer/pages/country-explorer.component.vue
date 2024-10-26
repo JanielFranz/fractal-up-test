@@ -23,32 +23,11 @@ export default {
   methods : {
     //#region Utility Methods
 
-    async getImageUrlByName(name) {
-      try{
-        let imagesResponse = await this.imageService.getImageByName(name);
-        console.log('Images response', imagesResponse);
-        imagesResponse  = imagesResponse.data;
-        return imagesResponse.hits[0].webformatURL;
-      }catch(error){
-        console.error(error);
-        return null;
-      }
-    },
-
-    async getFlagImageUrlByName(name) {
-      try{
-        let imagesResponse = await this.imageService.getImageByName(name);
-        imagesResponse  = imagesResponse.data;
-        console.log('Flag Images response', imagesResponse);
-        // return imagesResponse.hits[0].webformatURL;
-        return imagesResponse.hits.filter( i => i.tags.includes('flag'))[0].webformatURL;
-      }catch(error){
-        console.error(error);
-        return null;
-      }
-    },
-
-
+    /**
+     * Build countries with image
+     * @param countries - countries to be filtered
+     * @returns {Promise<Country[]>} - countries with image
+     */
     async buildCountriesWithImage(countries) {
       try{
         return await Promise.all(
@@ -68,6 +47,11 @@ export default {
       }
     },
 
+    /**
+     * Build continent entities
+     * @param countries - countries to be filtered
+     * @returns {Promise<Continent[]>} - continent entities
+     */
     async buildContinentEntities(countries) {
       try{
         const uniqueContinentsName = [...new Set(countries.map(country => country.continent))];
@@ -89,6 +73,45 @@ export default {
     //#endregion
 
     //#region Service Methods
+
+    /**
+     * Get image url by country name
+     * @param name - country name
+     * @returns {Promise<*|null>} - image url
+     */
+    async getImageUrlByName(name) {
+      try{
+        let imagesResponse = await this.imageService.getImageByName(name);
+        console.log('Images response', imagesResponse);
+        imagesResponse  = imagesResponse.data;
+        return imagesResponse.hits[0].webformatURL;
+      }catch(error){
+        console.error(error);
+        return null;
+      }
+    },
+
+    /**
+     * Get flag image url by country name
+     * @param name - country name
+     * @returns {Promise<*|null>} - flag image url
+     */
+    async getFlagImageUrlByName(name) {
+      try{
+        let imagesResponse = await this.imageService.getImageByName(name);
+        imagesResponse  = imagesResponse.data;
+
+        return imagesResponse.hits.filter( i => i.tags.includes('flag'))[0].webformatURL;
+      }catch(error){
+        console.error(error);
+        return null;
+      }
+    },
+
+    /**
+     * Get all countries
+     * @returns {Promise<void>} - countries from the service
+     */
     async getCountries() {
       try{
         let countriesResponse = await this.countryService.getAllCountries();
@@ -107,8 +130,6 @@ export default {
 
         this.continents = await this.buildContinentEntities(this.countries);
 
-        console.log('continents', this.continents)
-        console.log("Countries final values", this.countries);
       } catch (error) {
         console.error(error);
       }
@@ -118,17 +139,22 @@ export default {
 
     //#region Event Handlers
 
+    /**
+     * On word added event handler
+     * @param word - word to be searched
+     */
     onWordAdded(word) {
       this.searchWord = word;
 
         this.filteredByWordsCountries = this.flexibleCountries.filter((country) =>
             country.name.toLowerCase().includes(word.toLowerCase())
         );
-
-      console.log("Word added", this.searchWord);
-      console.log("Filtered countries", this.filteredByWordsCountries);
     },
 
+    /**
+     * On continent selected event handler
+     * @param continent - continent to be filtered
+     */
     onContinentSelected(continent) {
       this.flexibleCountries = this.countries;
       console.log('continent arrived', continent);
@@ -139,12 +165,14 @@ export default {
 
     //#endregion
   },
+
+  //#region Lifecycle Hooks
   created(){
     this.countryService = new CountryService();
     this.imageService = new ImageService();
     this.getCountries();
   }
-
+  //#endregion
 }
 </script>
 
