@@ -35,6 +35,18 @@ export default {
       }
     },
 
+    async getFlagImageUrlByName(name) {
+      try{
+        let imagesResponse = await this.imageService.getImageByName(name);
+        imagesResponse  = imagesResponse.data;
+        console.log('Flag Images response', imagesResponse);
+        // return imagesResponse.hits[0].webformatURL;
+        return imagesResponse.hits.filter( i => i.tags.includes('flag'))[0].webformatURL;
+      }catch(error){
+        console.error(error);
+        return null;
+      }
+    },
 
 
     async buildCountriesWithImage(countries) {
@@ -43,7 +55,7 @@ export default {
             countries.map(async (country) => {
 
               const countryImageUrl = await this.getImageUrlByName(country.name);
-              const countryFlagImageUrl = await this.getImageUrlByName(`flag of ${country.name}`);
+              const countryFlagImageUrl = await this.getFlagImageUrlByName(`flag of ${country.name}`);
               return {
                 ...country,
                 countryImgUrl: countryImageUrl,
