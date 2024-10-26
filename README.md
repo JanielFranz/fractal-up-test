@@ -1,5 +1,18 @@
-# Vue 3 + Vite
+# Summary
+Web application developed as part of the Fractal Up company test
+## Features
+- Search for a country by name
+- Filter by continent
+- Select information about a country
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Framework and Dependencies
+- VueJs
+- PrimeVue
+- PrimeFlex
+- Axios
+- Apollo Client
+- Vue Router
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Information Providers
+- Pixabay
+- Countries Trevor Blades
